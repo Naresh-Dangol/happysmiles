@@ -20,7 +20,7 @@ class SubscriberController extends Controller
         ]);
         $data = $request->all();
         Subscriber::create($data);
-        return redirect()->back();
+        return redirect()->back()->with('success','Thank you!!');
     }
 
     public function destroy($id)

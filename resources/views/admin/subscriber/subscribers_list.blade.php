@@ -58,7 +58,7 @@
         <tr>
           <td>{{$index+1}}</td>
           <td>{{$subscriber->email}}</td>
-          <td>{{$subscriber->created_at}}</td>
+          <td>{{date('F d, Y' ,strtotime($subscriber->created_at))}}</td>
           <td><a href="/admin/subscribers-list/{{$subscriber->id}}" class="btn btn-danger">Delete</a></td>
         </tr>
         @endforeach

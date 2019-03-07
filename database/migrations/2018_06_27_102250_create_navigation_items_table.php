@@ -16,7 +16,7 @@ class CreateNavigationItemsTable extends Migration
         Schema::create('navigation_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort');
-            $table->integer('nav_id')->unsigned()->nullable();
+            $table->integer('navigation_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->string('file');
             $table->string('content')->nullable();

@@ -28,6 +28,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Thanks for Contacting Happy Smile Health Foundation")->view('contact.contact_mail');
+        return $this->subject("Thanks for Registered. EasyLink Consultancy")->view('contact.contact_mail');
     }
 }

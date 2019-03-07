@@ -19,7 +19,7 @@
 <section class="content">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">New Navigation for Main Category</h3>  
+            <h3 class="box-title">New Navigation for {{$category}} Category</h3>  
 
         <div class="col-sm-12">
             @if (count($errors) > 0)
@@ -72,7 +72,7 @@
                     <input class="form-control {{ $errors->has('link') ? 'has-error' : '' }}" type="text" id="link_url" name="link" placeholder="URL Link" value="{{old('link')}}">
                 </div>
 
-                <div id="attachment_" class="form-group col-md-10" style="display: none">
+                <div id="attachment" class="form-group col-md-10" style="display: none">
                 	<label for="attachment">Attachment</label>
                 	<input type="file" class="form-control" id="attachment" name="attachment">
                 </div>
@@ -121,14 +121,27 @@
                                   
                 </select>
             </div>
+            
+            
+            <!--/.parent_id_div-->
+                <div id="parent_id_div" class="form-group col-md-12">
+                        <label for="parent_page_id">Parent Navigation <i class="reqr">*</i></label> 
+                        <select class="form-control" name="parent_page_id" required>
+                            <option value="0">----none-----</option>
+                            @foreach($categories as $c)
+                            <option value="{{$c->id}}">{{$c->nav_name}}</option>
+                             @endforeach             
+                        </select>   
+                </div>
+            <!--/.end parent_id_div-->
 
-             <div class="form-group col-md-12">
-                <label for="page_template">Page Template <i class="reqr">*</i></label>   
-                <select class="form-control" name="page_template" id="page_template" required=""> 
-                    <option value="Normal">Normal</option>
-                    <option value="None">None</option>                                  
-                </select>
-            </div>
+            <!-- <div class="form-group col-md-12">-->
+            <!--    <label for="page_template">Page Template <i class="reqr">*</i></label>   -->
+            <!--    <select class="form-control" name="page_template" id="page_template" required=""> -->
+            <!--        <option value="Normal">Normal</option>-->
+            <!--        <option value="None">None</option>                                  -->
+            <!--    </select>-->
+            <!--</div>-->
                                                            
 
             <div class="form-group col-md-12">
@@ -296,7 +309,15 @@
                     $('#video_gallery_div').hide();            
                     $('#slider_div').show();
                     
-                } 
+                } else if(page_type == 'Attachment'){
+                    $('#short_content_div').show();
+                    $('#long_content_div').hide();                           
+                    $('#url_link_div').hide();
+                    $('#url_link').prop('required', false);
+                    $('#photo_gallery_div').hide();
+                    $('#video_gallery_div').hide();            
+                    $('#attachment').show();
+                }
              });
         
         
@@ -370,7 +391,13 @@
             height: '100px',
             enterMode :CKEDITOR.ENTER_BR,
             filebrowserWindowWidth: '400',
-            filebrowserWindowHeight: '300'
+            filebrowserWindowHeight: '300',
+             filebrowserBrowseUrl: '{{asset("assets/ckfinder/ckfinder.html")}}',
+            filebrowserImageBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Images")}}',
+            filebrowserFlashBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Flash")}}',
+            filebrowserUploadUrl: '{{asset("assetsckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files")}}',
+            filebrowserImageUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images")}}',
+            filebrowserFlashUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash")}}',
         });
 
 
@@ -397,7 +424,13 @@
             height: '250px',
             enterMode :CKEDITOR.ENTER_BR,
             filebrowserWindowWidth: '400',
-            filebrowserWindowHeight: '300'
+            filebrowserWindowHeight: '300',
+             filebrowserBrowseUrl: '{{asset("assets/ckfinder/ckfinder.html")}}',
+            filebrowserImageBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Images")}}',
+            filebrowserFlashBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Flash")}}',
+            filebrowserUploadUrl: '{{asset("assetsckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files")}}',
+            filebrowserImageUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images")}}',
+            filebrowserFlashUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash")}}',
             
         });
     </script> 

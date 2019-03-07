@@ -42,8 +42,9 @@ class NavigationController extends Controller
         }
 
         $next_position = $current_max_position + 1;
+        $categories = Navigation::where('page_type','group')->get();
 
-        return view('admin.navigation.navigation_create',compact('category','next_position'));
+        return view('admin.navigation.navigation_create',compact('category','next_position','categories'));
     }
 
     /**
@@ -55,9 +56,11 @@ class NavigationController extends Controller
     public function store(Request $request, $nav_category)
     {
         $this->validate($request,[
-            'nav_name' => 'required|min:3',
+            'nav_name' => 'required|min:2',
             'alias' => 'required|unique:navigations',
             'caption' => 'required',
+            'icon_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
 
         ]);
 
@@ -115,7 +118,7 @@ class NavigationController extends Controller
                 'name'=>$names[$index],
                 'content'=>$captions[$index],
                 'file'=>$filename,
-                'nav_id'=>$navigation->id
+                'navigation_id'=>$navigation->id
                     ]);  
             }
         }*/
@@ -146,7 +149,8 @@ class NavigationController extends Controller
     public function edit($nav_category, $id)
     {
         $navigation = Navigation::find($id);
-        return view('admin.navigation.navigation_edit', compact('navigation','nav_category'));
+        $categories = Navigation::where('page_type','group')->get();
+        return view('admin.navigation.navigation_edit', compact('navigation','nav_category','categories'));
     }
 
     /**
@@ -161,7 +165,9 @@ class NavigationController extends Controller
         $this->validate($request,[
             'nav_name' => 'required|min:3',
             'caption' => 'required',
-            'banner_image' => 'mimes:jpeg,jpg,bmp,png'
+            'icon_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            
         ]);
         $request->offsetUnset('_token');
         $request->offsetUnset('_method');
@@ -190,11 +196,22 @@ class NavigationController extends Controller
             $destinationPath = public_path('uploads/banner_file');
             $banner_image->move($destinationPath,$data['banner_image']);
         }
+        
+        if($request->hasFile('attachment')){
+            if(file_exists(public_path('uploads/attachment_file').'/'.$navigation->attachment)){
+                File::delete('uploads/attachment_file/'.$navigation->attachment);
+            }
+
+            $attachment_file = $request->file('attachment');
+            $data['attachment'] = time().'_'.$attachment_file->getClientOriginalName();
+            $destinationPath = public_path('uploads/attachment_file');
+            $attachment_file->move($destinationPath,$data['attachment']);
+        }
 
         Navigation::where('id',$id)->update($data);
 
         $navigationItems = NavigationItems::all();
-        NavigationItems::where('nav_id',$id)->update(['nav_id'=>$id]);
+        NavigationItems::where('navigation_id',$id)->update(['navigation_id'=>$id]);
 
         return redirect('/admin/navigation-list/'.$nav_category . $parent_id )->with('success','Data Updated Successfully!!');
         
@@ -231,6 +248,23 @@ class NavigationController extends Controller
         $navigation->delete($id);
         return redirect('admin/navigation-list/'.$nav_category.$parent_id)->with('success','Data Deleted Succssfully!!');
     }
+    
+     public function deleteIconImage($nav_category,$id){
+        $icons = Navigation::where('id',$id)->where('icon_image','like','%_%')->first();
+        $image = $icons->icon_image;
+        File::delete(public_path('uploads/icon_image/'.$image));
+        $icons->update(['icon_image'=>null]);
+        return redirect()->back();
+    }
+
+    public function deleteBannerImage($nav_category,$id){
+        $bannerimage = Navigation::where('id',$id)->where('banner_image','like','%_%')->first();
+        $image = $bannerimage->banner_image;
+        File::delete(public_path('uploads/banner_file/'.$image));
+        $bannerimage->update(['banner_image'=>null]);
+        return redirect()->back();
+    }
+
 
     public function childNavigation($nav_category,$parent_id){
         $navigations = Navigation::where('nav_category',$nav_category)->where('parent_page_id',$parent_id)->get();
@@ -242,7 +276,7 @@ class NavigationController extends Controller
     /*Photo gallery*/
 
     public function showMediaList($nav_category=null,$id){
-        $medias = NavigationItems::where('nav_id',$id)->paginate(5);
+        $medias = NavigationItems::where('navigation_id',$id)->paginate(10);
         return view('admin.gallery.photo_gallery_list',compact('nav_category','medias'));
     }
 
@@ -274,7 +308,7 @@ class NavigationController extends Controller
             $destinationPath = public_path('uploads/photo_gallery');
             $image->move($destinationPath, $filename);
             $media = NavigationItems::create([
-                                            'nav_id'=>$request->id,
+                                            'navigation_id'=>$request->id,
                                             'sort'=>$orders[$index],
                                             'file'=>$filename,
                                             'name'=>$names[$index],

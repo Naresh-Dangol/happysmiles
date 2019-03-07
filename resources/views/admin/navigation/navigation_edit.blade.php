@@ -68,16 +68,34 @@
                 </div>
 
                 
-
-                <div id="url_link_div" class="form-group col-md-10" style="display: none;">
+            @if($navigation->link)
+                <div id="url_link_div" class="form-group col-md-10">
                     <label for="link_url">URL Link <i class="reqr">*</i> (Email Link ex= mailto:example@gmail.com) (Phone Link ex= tel:9849....)</label>
                     <input class="form-control {{ $errors->has('link') ? 'has-error' : '' }}" type="text" id="link_url" name="link" placeholder="URL Link" value="{{$navigation->link}}">
                 </div>
+                @else
+                 <div id="url_link_div" class="form-group col-md-10" style="display: none;">
+                    <label for="link_url">URL Link <i class="reqr">*</i> (Email Link ex= mailto:example@gmail.com) (Phone Link ex= tel:9849....)</label>
+                    <input class="form-control {{ $errors->has('link') ? 'has-error' : '' }}" type="text" id="link_url" name="link" placeholder="URL Link" value="{{$navigation->link}}">
+                </div>
+                @endif
 
-                <div id="attachment_" class="form-group col-md-10" style="display: none">
+                @if($navigation->attachment)
+                <div id="pre_attachment" class="form-group col-md-10">
+                    <label for="attachment">Previous Document</label>
+                    <div>{{$navigation->attachment}}</div>
+                </div>
+
+                <div id="attachment" class="form-group col-md-10">
                 	<label for="attachment">Attachment</label>
                 	<input type="file" class="form-control" id="attachment" name="attachment">
                 </div>
+                @else
+                 <div id="attachment" class="form-group col-md-10" style="display: none">
+                    <label for="attachment">Attachment</label>
+                    <input type="file" class="form-control" id="attachment" name="attachment">
+                </div>
+                @endif
 
                 <div class="clearfix"></div>
 
@@ -122,29 +140,45 @@
             <div class="form-group col-md-12">
                 <label for="page_type">Page Type <i class="reqr">*</i></label>   
                 <select class="form-control" name="page_type" id="page_type" required="">
-                    <option value="{{$navigation->page_type}}">{{$navigation->page_type}}</option>
+                    <option value="{{$navigation->page_type}}" >{{$navigation->page_type}}</option>
                   @foreach($page_types as $type)
-                    <option value="{{$type->page_type_title}}">{{$type->page_type_title}}</option>
+                    <option value="{{$type->page_type_title}}" >{{$type->page_type_title}}</option>
                     @endforeach
                                   
                 </select>
             </div>
-
-             <div class="form-group col-md-12">
-                <label for="page_template">Page Template <i class="reqr">*</i></label> 
             
-                <select class="form-control" name="page_template" id="page_template" required=""> 
-                    <option value="0" {{($navigation->page_template == 0)? 'selected' : ''}}>Normal</option>
-                    <option value="-1" {{($navigation->page_template == -1)? 'selected' : ''}}>None</option>                                  
-                </select>
-                
+             <div id="parent_id_div" class="form-group col-md-12">
+                <label for="parent_page_id">Parent Navigation <i class="reqr">*</i></label>
+                    <select class="form-control" name="parent_page_id">
+                        <option value="0" >----none-----</option>
+                        @foreach($categories as $c)
+                            <option value="{{$c->id}}" <?php echo ($c->id == $navigation->parent_page_id)?'selected':'';?>>
+                                {{$c->nav_name}}
+                            </option>
+                        @endforeach
+                    </select>    
             </div>
+
+            <!-- <div class="form-group col-md-12">-->
+            <!--    <label for="page_template">Page Template <i class="reqr">*</i></label> -->
+            
+            <!--    <select class="form-control" name="page_template" id="page_template" required=""> -->
+            <!--        <option value="0" {{--($navigation->page_template == 0)? 'selected' : ''--}}>Normal</option>-->
+            <!--        <option value="-1" {{--($navigation->page_template == -1)? 'selected' : ''--}}>None</option>                                  -->
+            <!--    </select>-->
+                
+            <!--</div>-->
                                                            
 
             <div class="form-group col-md-12">
                 <label for="img_file">Featured Image </label>
                
                     <img src="{{asset('uploads/icon_image/'.$navigation->icon_image)}}" alt="" height="150" width="100%">
+                    
+                    @if($navigation->icon_image)
+                    <a href="/admin/navigation-edit/{{$nav_category}}/{{$navigation->id}}" onclick="return confirm('Are you sure to delete')" style="color: red">Remove Feature Image</a>
+                    @endif
                    
                 
                     <input  type="file" class="form-control"  id="img_file" name="icon_image">
@@ -159,6 +193,10 @@
             <div class="form-group col-md-12">
                 <label for="banner_file">Banner Image</label>   
                     <img src="{{asset('uploads/banner_file/'.$navigation->banner_image)}}" alt="" height="150" width="100%">
+
+                    @if($navigation->banner_image)
+                    <a href="/admin/navigation-edit/{{$nav_category}}/{{$navigation->id}}/delete" onclick="return confirm('Are you sure to delete')" style="color: red">Remove Banner Image</a>
+                    @endif
                 
                     <input class="form-control" type="file" id="banner_file" name="banner_image">
             </div>
@@ -296,24 +334,14 @@
                     $('#video_gallery_div').hide();            
                     $('#slider_div').show();
                     
-                } else if (page_type == 'Itinerary Group') {
+                } else if(page_type == 'Attachment'){
                     $('#short_content_div').show();
-                    $('#long_content_div').show();                              
+                    $('#long_content_div').hide();                           
                     $('#url_link_div').hide();
                     $('#url_link').prop('required', false);
                     $('#photo_gallery_div').hide();
-                    $('#video_gallery_div').hide();           
-                    $('#slider_div').hide();
-                    $('#parent_id_div').show();
-                   
-                } else if (page_type == 'Itinerary') {
-                    $('#short_content_div').show();
-                    $('#long_content_div').show();                 
-                    $('#url_link_div').hide();
-                    $('#url_link').prop('required', false);
-                    $('#photo_gallery_div').show();
                     $('#video_gallery_div').hide();            
-                    $('#slider_div').hide();
+                    $('#attachment').show();
                 }
              });     
     </script>
@@ -330,7 +358,13 @@
             height: '100px',
             enterMode :CKEDITOR.ENTER_BR,
             filebrowserWindowWidth: '400',
-            filebrowserWindowHeight: '300'
+            filebrowserWindowHeight: '300',
+            filebrowserBrowseUrl: '{{asset("assets/ckfinder/ckfinder.html")}}',
+            filebrowserImageBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Images")}}',
+            filebrowserFlashBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Flash")}}',
+            filebrowserUploadUrl: '{{asset("assetsckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files")}}',
+            filebrowserImageUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images")}}',
+            filebrowserFlashUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash")}}',
         });
 
         CKEDITOR.replace('long_content',{
@@ -353,7 +387,13 @@
             height: '250px',
             enterMode :CKEDITOR.ENTER_BR,
             filebrowserWindowWidth: '400',
-            filebrowserWindowHeight: '300'
+            filebrowserWindowHeight: '300',
+            filebrowserBrowseUrl: '{{asset("assets/ckfinder/ckfinder.html")}}',
+            filebrowserImageBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Images")}}',
+            filebrowserFlashBrowseUrl : '{{asset("assets/ckfinder/ckfinder.html?type=Flash")}}',
+            filebrowserUploadUrl: '{{asset("assetsckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files")}}',
+            filebrowserImageUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images")}}',
+            filebrowserFlashUploadUrl : '{{asset("assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash")}}',
             
         });
     </script> 

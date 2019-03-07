@@ -33,7 +33,6 @@ class CreateNavigationsTable extends Migration
             $table->string('page_keyword')->nullable();
             $table->string('page_description')->nullable();    
             $table->enum('page_status',['1','0']);        
-
             $table->timestamps();
         });
     }
@@ -48,3 +47,4 @@ class CreateNavigationsTable extends Migration
         Schema::dropIfExists('navigations');
     }
 }
+

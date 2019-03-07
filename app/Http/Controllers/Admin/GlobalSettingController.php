@@ -74,7 +74,7 @@ class GlobalSettingController extends Controller
 
         $destinationPath = public_path('uploads/icons');
         $logo = Image::make($site_logo->getRealPath());
-        $logo->resize(94,61,function($constraint){
+        $logo->resize(147,57,function($constraint){
             $constraint->aspectRatio();
         })->save($destinationPath . '/' . $data['site_logo'] );
     }       

@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Navigation extends Model
 {
     protected $table = "navigations";
-
-    public function navigationItems(){
-        return $this->hasMany('App\Models\NavigationItems');
-    }
-
     protected $fillable = [
     	'nav_name',
     	'alias',
@@ -32,4 +27,9 @@ class Navigation extends Model
     	'page_description',
     	'page_status'
     ];
+
+    public function navigationitems(){
+
+        return $this->hasMany('App\Models\NavigationItems');
+    }
 }

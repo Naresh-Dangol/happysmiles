@@ -1,6 +1,6 @@
 @include('frontend.header')
-@if(\Request::is('/*'))
+ @if(\Request::is('/*'))
 @include('frontend.slider')
-@endif
+@endif  
 @yield('content')
-@include('frontend.footer')
+ @include('frontend.footer')

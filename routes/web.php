@@ -32,6 +32,7 @@ Route::prefix('admin')->group(function(){
 
 	//photo gallery
 	Route::get('/navigation-list/{category}/{id}/showList','Admin\NavigationController@showMediaList');
+	
 	Route::get('/navigation-list/{category}/{id}/showList/create','Admin\NavigationController@addMedia');
 	Route::post('/navigation-list/{category}/{id}/addAlbum','Admin\NavigationController@storeAlbum');
 	Route::get('/navigation-list/media/{id}/delete','Admin\NavigationController@deleteMedia');
@@ -49,6 +50,9 @@ Route::prefix('admin')->group(function(){
 	Route::post('/navigation-list/{category}/{id?}','Admin\NavigationController@store');
 	Route::get('/navigation-edit/{category}/{id}/edit','Admin\NavigationController@edit');
 	Route::put('/navigation-edit/{category}/{id}','Admin\NavigationController@update');
+
+	Route::get('/navigation-edit/{category}/{id}','Admin\NavigationController@deleteIconImage');
+	
 	Route::get('/navigation-list/{category}/{id}/delete','Admin\NavigationController@destroy');
 	Route::get('/navigation-list/{category}/{id}','Admin\NavigationController@childNavigation')->where(['id'=>'[0-9]+']);
 	Route::get('/navigation-list/{category}/{id}/create','Admin\NavigationController@create')->where(['id'=>'[0-9]+']);
@@ -64,16 +68,23 @@ Route::prefix('admin')->group(function(){
 	Route::put('/navigation-list/{id}', 'Admin\NavigationController@update_status')->name('update_status');
 });
 
+
+Route::post('/enquiries','ContactController@send')->name('enquiries.send');
+
 Route::post('/subscriber','Admin\SubscriberController@store')->name('subscriber');
-
-Route::post('/enquiries','Admin\EnquiryController@send')->name('enquiries.send');
-Route::post('/consultation','ConsultationController@consult')->name('consult');
+Route::get('/sample-document','HomeController@sample_form');
 
 
-Route::get('/contact-us','ContactController@contact')->name('contact-us');
+
+Route::get('details/{alias}', 'HomeController@single');
+Route::get('gallery/{alias}','GalleryController@gallery');
+// Route::post('/page-search','HomeController@search')->name('page_search');
+
+Route::get('/findIntake','HomeController@find_intake');
+Route::post('/student-register','StudentRegisterController@register');
+Route::post('/sample-document-form','StudentRegisterController@sample_document_form');
 
 Route::any('{alias}', 'HomeController@front_pages');
-Route::get('details/{alias}', 'HomeController@single');
-Route::post('/page-search','HomeController@search')->name('page_search');
+
 
 

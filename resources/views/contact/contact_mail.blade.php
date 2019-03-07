@@ -19,7 +19,7 @@
                                     <table width="115" border="0" cellspacing="0" cellpadding="0" >
                                         <tr>
                                             <td>
-                                               Happy Smiles Health Foundation
+                                               EasyLink Career Consultant
                                            </td>
                                        </tr>
                                    </table>                        
@@ -45,7 +45,7 @@
                         <div style="line-height: 44px;">
                             <font face="Arial, Helvetica, sans-serif" size="5" color="#57697e" style="font-size: 34px;">
                                 <span style="font-family: Arial, Helvetica, sans-serif; font-size: 34px; color: #57697e;">
-                                    Thanks for Contact Us
+                                    Thanks for Registered
                                 </span></font>
                             </div>
                             <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
@@ -63,7 +63,7 @@
                                 <td align="center">
                                     <font face="Arial, Helvetica, sans-serif" size="3" color="#57697e" style="font-size: 26px;">
                                         <span style="font-family: Arial, Helvetica, sans-serif; font-size: 26px; color: #57697e;">
-                                         We Will Response Soon 
+                                        We will response soon..
                                      </span></font>              
                                  </td>
                              </tr> 
@@ -79,7 +79,7 @@
                             <tr><td align="center">
                                 <font face="Arial, Helvetica, sans-serif" size="3" color="#96a5b5" style="font-size: 13px;">
                                     <span style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #96a5b5;">
-                                        2018 ©  Happy Smiles Health Foundation. ALL Rights Reserved.
+                                        2019 ©  EasyLink Career Consultant. ALL Rights Reserved.
                                     </span></font>              
                                 </td></tr>          
                             </table>

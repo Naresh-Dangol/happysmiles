@@ -12,8 +12,9 @@
 					<div class="box-header">
 						<h3 class="box-title" style="font-weight: bold;margin-bottom: 10px;">
 							{{$nav_category}} Category Navigation List
-						</h3>
 
+						</h3>
+						
 						<div class="clearfix"></div>
 
 						<div class="col-sm-9">
@@ -50,7 +51,8 @@
 						<table id="datatable" class="table table-bordered">
 							<thead>
 								<tr>
-									<th>S.N</th>
+									<th>#</th>
+									<th>ID</th>
 									<th>Name</th>
 									@if($nav_category!='SNS')
 									<th>Page Type</th>
@@ -66,6 +68,7 @@
 								@foreach($navigations as $index => $navigation)
 								<tr>
 									<td>{{$index+1}}</td>
+									<td>{{$navigation->id}}</td>
 									<td>{{$navigation->nav_name}}</td>
 
 									@if($nav_category!='SNS')

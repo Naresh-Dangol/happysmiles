@@ -1,160 +1,139 @@
-<footer class="main-footer">
 
-    <!--Widgets Section-->
-    <div class="widgets-section">
-        <div class="container">
-            <div class="row">
-
-                        <!--Footer Column-->
-                        <div class="footer-column col-md-4 col-sm-6 col-xs-12">
-                            <div class="footer-widget contact-widget">
-                                <h3 class="footer-title">Contact us</h3>
-                                <div class="widget-content">
-                                    <ul class="contact-info">
-                                        @if(count($footers) > 0)
-                                        @foreach($footers as $footer)
-                                            <li>@php($icons = config('options')['icons'])<span class="{{$icons[$footer->alias]}}"></span>{{$footer->caption}}</li>
-                                        @endforeach
-                                        @endif
-                                        <!-- <li><span class="icon-signs"></span>22/121 Apple Street, New York, <br>NY 10012, USA</li>
-                                        <li><span class="icon-phone-call"></span> Phone: +123-456-7890</li>
-                                        <li><span class="icon-e-mail-envelope"></span>info@happysmiles.com</li> -->
-                                    </ul>
-                                </div>
-                                <ul class="social">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!--Footer Column-->
-                        <div class="footer-column col-md-4 col-sm-6 col-xs-12">
-                            <div class="footer-widget links-widget">
-                                @if(count($links) > 0)
-                                <h3 class="footer-title">Useful Links</h3>
-                                <div class="widget-content">
-                                    <ul class="list">
-                                        @foreach($links as $link)
-                                        <li><a href="{{$link->alias}}">{{$link->nav_name}}</a>
-                                        </li>
-                                        @endforeach
-                                        
-                                    </ul>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!--Footer Column-->
-                        <div class="footer-column col-md-4 col-sm-6 col-xs-12">
-                            <div class="footer-widget news-widget">
-                                <h3 class="footer-title">Newsletter</h3>
-                                <div class="widget-content">
-                                    <!--Post-->
-                                    <div class="text"><p>Sign up today for hints, tips and the <br>latest product news</p></div>
-                                    <!--Post-->
-                                    <form action="{{route('subscriber')}}" class="default-form" method="post">
-                                        {{csrf_field()}}
-                                        <input type="email" name="email" placeholder="Email Address">
-                                        <button type="submit" class="thm-btn">Subscribe Us</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-
-             </div>
-         </div>
-     </div>
-
-     <!--Footer Bottom-->
-     <section class="footer-bottom">
-        <div class="container">
-            <div class="pull-left copy-text">
-                <p>Copyrights © 2017 All Rights Reserved. Powered by  <a href="#"> Radiant Infotech nepal.</a></p>
-
-            </div><!-- /.pull-right -->
-            <div class="pull-right get-text">
+<!-- start footer Area -->      
+<footer class="footer-area section-gap">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+                <h4>Test Preparation</h4>
+                @if(count($courses)>0)
                 <ul>
-                    <li><a href="#">Support |  </a></li>
-                    <li><a href="#">Privacy & Policy |</a></li>
-                    <li><a href="#"> Terms & Conditions</a></li>
-                </ul>
-            </div><!-- /.pull-left -->
-        </div><!-- /.container -->
-    </section>
+                    @foreach($courses as $course)
+                    <li><a href="{{$course->alias}}">{{$course->nav_name}}</a></li>
+                    @endforeach
+                </ul>   
+                @endif                            
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+                <h4>Quick links</h4>
+                @if(count($footerlinks) >0)
+                <ul>
+                    @foreach($footerlinks as $links)
+                        @if($links->alias !='our-services')
+                        <li><a href="{{$links->alias}}">{{$links->nav_name}}</a></li>
+                        @endif
+                    @endforeach
+                </ul> 
+                @endif                              
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+                <h4>SERVICES</h4>
+                @if(count($services) > 0)
+                <ul>
+                    @foreach($services as $service)
+                    <li><a href="{{$service->alias}}">{{$service->nav_name}}</a></li>
+                    @endforeach
+                </ul>       
+                @endif                        
+            </div>
+        </div>
+        <div class="col-lg-4  col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+                <h4>Newsletter</h4>
+                @if(Session::has('success'))
+                    <div class="alert alert-success hidemsg">{{Session::get('success')}}</div>
+                    @endif 
 
-</footer>
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger hidemsg">{{Session::get('error')}}</div>
+                    @endif 
+                <p>Stay update with our latest Course</p>
+                <div class="" id="mc_embed_signup">
+                    <form action="{{route('subscriber')}}" method="post">
+                        {{csrf_field()}}
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="lnr lnr-arrow-right"></span>
+                                </button>    
+                            </div>
+                            <div class="info"></div>  
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>                                          
+    </div>
+    <div class="footer-bottom row align-items-center justify-content-between">
+        <p class="footer-text m-0 col-lg-6 col-md-12">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved |  powered by <a href="https://radiantnepal.com" target="_blank">Radiant InfoTech Nepal</a>
+        </p>
 
-<!-- Scroll Top Button -->
-    <button class="scroll-top tran3s color2_bg">
-        <span class="fa fa-angle-up"></span>
-    </button>
-    <!-- pre loader  -->
-    <div class="preloader"></div>
-
-
-
-
+        @if(count($socials)>0)
+        <div class="col-lg-6 col-sm-12 footer-social">
+            @foreach($socials as $social)
+            <a href="{{$social->link}}"><i class="fab fa-{{strtolower($social->caption)}}"></i></a>
+            @endforeach
+        </div>
+        @endif
+    </div>                      
 </div>
-
-<!-- jQuery js -->
-    <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
-    <!-- bootstrap js -->
-    <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
-    <!-- jQuery ui js -->
-    <script src="{{asset('assets/frontend/js/jquery-ui.js')}}"></script>
-    <!-- owl carousel js -->
-    <script src="{{asset('assets/frontend/js/owl.carousel.min.js')}}"></script>
-    <!-- jQuery validation -->
-    <script src="{{asset('assets/frontend/js/jquery.validate.min.js')}}"></script>
-
-    <!-- mixit up -->
-    <script src="{{asset('assets/frontend/js/wow.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.mixitup.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.fitvids.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/menuzord.js')}}"></script>
-
-    <!-- revolution slider js -->
-    <script src="{{asset('assets/frontend/js/jquery.themepunch.tools.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.themepunch.revolution.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.actions.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.carousel.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.kenburn.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.layeranimation.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.migration.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.navigation.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.parallax.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.slideanims.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/revolution.extension.video.min.js')}}"></script>
-
-    <!-- fancy box -->
-    <script src="{{asset('assets/frontend/js/jquery.polyglot.language.switcher.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/nouislider.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.bootstrap-touchspin.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/SmoothScroll.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.appear.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.countTo.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.flexslider.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/imagezoom.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.fancybox.js')}}"></script>
-    <script id="map-script" src="{{asset('assets/frontend/js/default-map.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/jquery.bxslider.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
-    
-
-    @yield('scripts')
-
-    
-    
+</footer>   
+<!-- End footer Area -->    
 
 
+<script src="{{asset('assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>          
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+<script src="{{asset('assets/js/easing.min.js')}}"></script>            
+<script src="{{asset('assets/js/hoverIntent.js')}}"></script>
+<script src="{{asset('assets/js/superfish.min.js')}}"></script> 
+<script src="{{asset('assets/js/jquery.ajaxchimp.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script> 
+<script src="{{asset('assets/js/jquery.tabs.min.js')}}"></script>                       
+<script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>    
+<script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>                                  
+<script src="{{asset('assets/js/mail-script.js')}}"></script>   
+<script src="{{asset('assets/js/wow.min.js')}}"></script>  
+<script src="{{asset('assets/js/main.js')}}"></script>  
 
-    
+<script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 1,
+                        nav: false
+                    },
+                    900: {
+                        items: 2,
+                        nav: false
+                    },
+                    1000: {
+                        items:5,
+                        nav: true,
+                        loop: false,
+                        margin: 20
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //carousel -->
+
+    @yield('script')
 </body>
 </html>

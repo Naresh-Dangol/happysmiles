@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'The Experts || Happy Smiles Health Foundation'),
+    'name' => env('APP_NAME', 'EasyLink Consultancy'),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,11 +171,15 @@ return [
         /*
          * Application Service Providers...
          */
+        
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+
+        
         Intervention\Image\ImageServiceProvider::class,
 
 
@@ -183,7 +187,9 @@ return [
         App\Providers\NavigationComposerProvider::class,
         App\Providers\TopHeaderComposerProvider::class,
         App\Providers\FooterComposerProvider::class,
-        App\providers\LinksComposerProvider::class,
+        App\Providers\FooterLinksComposerProvider::class,
+        App\Providers\SocialComposerProvider::class,
+        // App\providers\GlobalSettingComposerProvider::class,
         Cohensive\Embed\EmbedServiceProvider::class,
 
     ],

@@ -38,7 +38,7 @@ function listChild($param){
 	if($param == 0){
 		return null;
 	}
-	$childnav = Navigation::where('parent_page_id',$param)->where('page_status',1)->get();
+	$childnav = Navigation::where('parent_page_id',$param)->orderBy('position','asc')->where('page_status',1)->get();
 	return $childnav;
 }
 
@@ -54,15 +54,31 @@ function parent_title($param){
 	return $title->nav_name;
 }
 
+// Show parent alias
+function parent_alias($param){
+	$title = Navigation::where('id',$param)->first();
+	return $title->alias;
+}
+
 // Show parent caption
 function parent_caption($param){
 	$title = Navigation::where('id',$param)->first();
 	return $title->caption;
 }
 
+function parent_short_content($param){
+	$short_content = Navigation::where('id',$param)->first();
+	return $short_content->short_content;
+}
+
 function parent_long_content($param){
 	$content = Navigation::where('id',$param)->first();
 	return $content->long_content;
+}
+
+function parent_icon_image($param){
+	$icon_image = Navigation::where('id',$param)->first();
+	return $icon_image->icon_image;
 }
 
 
@@ -71,6 +87,12 @@ function setActive($alias)
 {
     return Request::is($alias) ? 'active' :  '';
 }
+
+function format_text($string) { 
+$string = str_replace(array("\r\n", "\r", "\n"), "<br />", $string); 
+return $string; 
+} 
+
 
 
 ?>

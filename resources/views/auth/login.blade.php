@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Panel | User Login</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="shortcut icon" href="{{asset('assets/frontend/images/logo/logo-1.png')}}"/>
+    
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/bootstrap/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/font-awesome.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/admin_custom.css')}}" />
+    <link rel="icon" type="image/png" href="{{asset('assets/img/fav_icon.png')}}" sizes="16x16">
 
     <script type="text/javascript" src="{{asset('assets/admin/js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/admin/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -20,13 +21,13 @@
             <h3>ADMIN LOGIN</h3>
             <form method="post" action="{{url('/admin/login')}}">
                 {{csrf_field()}}
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                <div class="form-group">
+                  
+                  <input type="name" class="form-control" name="name" id="name" placeholder="Username">
                 </div>
                 <hr/>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                <div class="form-group">
+                  
                   <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                 </div>
                 
@@ -36,7 +37,7 @@
         </div>
         <div class="col-md-offset-4 col-md-4">
             <br/>
-            <p style="text-align: center;">&copy; Happy Smile - 2018<br/> Powered By: <a href="http://radiantnepal.com/" target="_blank">Radiant InfoTech Nepal</a></p>
+            <p style="text-align: center;">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved |  powered by <a href="https://radiantnepal.com" target="_blank">Radiant InfoTech Nepal</a></p>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@
                             <table width="115" border="0" cellspacing="0" cellpadding="0" >
                                 <tr>
                                     <td>
-                                        Happy Smiles Health Foundation
+                                        EasyLink Career Consultant
                                     </td>
                                 </tr>
                             </table>                        
@@ -63,10 +63,7 @@
                                                         <td>Email:</td>
                                                         <td>{{$data->email}}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Phone:</td>
-                                                        <td>{{$data->phone}}</td>
-                                                    </tr>
+                                                    
                                                     <tr>
                                                         <td>Subject:</td>
                                                         <td>{{$data->subject}}</td>
@@ -76,13 +73,7 @@
                                                         <td>{{$data->message}}</td>
                                                     </tr>
 
-
                                                 </table>
-                                               
-                                                
-                                                
-                                                
-                                                
                                             </font>              
                                         </td>
                                     </tr>  
@@ -103,7 +94,7 @@
                             <tr><td align="center">
                                 <font face="Arial, Helvetica, sans-serif" size="3" color="#96a5b5" style="font-size: 13px;">
                                     <span style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #96a5b5;">
-                                        2018 © Happy Smile Health Foundation. ALL Rights Reserved.
+                                        2019 © EasyLink Career Consultant. ALL Rights Reserved.
                                     </span></font>              
                                 </td></tr>          
                             </table>

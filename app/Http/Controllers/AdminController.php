@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Admin;
 use Hash;
+use App\Models\Navigation;
 
 
 class AdminController extends Controller
@@ -13,7 +14,8 @@ class AdminController extends Controller
     }
 
     public function index(){
-    	return view('admin.dashboard');
+        $navigations = Navigation::where('nav_category','Main')->where('parent_page_id',0)->get();
+    	return view('admin.dashboard',compact('navigations'));
     }
 
     public function change_profile(){

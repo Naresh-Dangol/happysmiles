@@ -1,7 +1,7 @@
 
   <!-- /.content-wrapper -->
   <footer class="main-footer text-center">
-    <strong>Admin Panel || &copy; 2018. Powered By: Radiant Info Tech Nepal.</strong> 
+    <strong>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved |  powered by <a href="https://radiantnepal.com" target="_blank">Radiant InfoTech Nepal</a></strong> 
   </footer>
   
   <div class="control-sidebar-bg"></div>
